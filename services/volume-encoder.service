@@ -1,0 +1,11 @@
+[Unit]
+ Description=volume knob monitor
+ After=pulseaudio.service
+
+[Service]
+ User=root
+ Group=root
+ ExecStart=/home/pi/scripts/rotary_encoder_volume.py
+
+[Install]
+ WantedBy=multi-user.target

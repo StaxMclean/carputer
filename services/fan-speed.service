@@ -1,0 +1,11 @@
+[Unit]
+ Description=fan speed
+ After=pulseaudio.service
+
+[Service]
+ User=pi
+ Group=pi
+ ExecStart=/home/pi/scripts/fan.py
+
+[Install]
+ WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+ Description=light detector
+ After=pulseaudio.service
+
+[Service]
+ User=pi
+ Group=pi
+ ExecStart=/home/pi/scripts/lightdetect.py
+
+[Install]
+ WantedBy=multi-user.target

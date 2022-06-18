@@ -6,12 +6,9 @@ from time import time as timer
 import os
 
 gpio_acc=27
-gpio_pw=4
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(gpio_acc, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(gpio_pw, GPIO.OUT)
-GPIO.output(gpio_pw, 1)
 
 timeout = 1200
 countdown = timeout

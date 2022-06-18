@@ -20,7 +20,7 @@ pip3 install rpi-backlight==1.8.1
 
 #Copy keymap file to triggerhappy service directory
 echo copying keymap file...
-sudo cp configuration files/keys.conf /etc/triggerhappy/triggers.d
+sudo cp configuration/keys.conf /etc/triggerhappy/triggers.d
 
 #Change user nobody to pi in /etc/systemd/system/multi-user.target.wants/triggerhappy.service
 echo configuring TriggerHappy service...

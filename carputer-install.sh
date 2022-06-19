@@ -4,6 +4,14 @@
 echo Running apt update...
 sudo apt update
 
+#Install Dash
+git clone https://github.com/openDsh/dash
+
+cd dash
+
+./install.sh
+
+
 #Setting config file options
 echo Setting config file options...
 sudo sh -c "echo '\

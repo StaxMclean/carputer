@@ -15,6 +15,20 @@ cd dash
 
 cd ~/carputer
 
+#Setting install run once flag
+flag="install_flag"
+#
+# if there is no $flag, this is the 1st time
+if [[ ! -f "$flag" ]] ; then
+	touch "$flag"
+	#write out current crontab
+	crontab -l > mycron
+	#echo new cron into cron file
+	echo "@reboot ./home/pi/carputer/scripts/rtc_config.sh" >> mycron
+	#install new cron file
+	crontab mycron
+	rm mycron
+fi
 
 #Setting config file options
 echo Setting config file options...
@@ -37,7 +51,7 @@ sudo sed -i '/^dtparam=audio=on$/s/^/#/' /boot/config.txt
 
 #Setting cmdline file options
 echo Setting cmdline file options...
-sudo sed -i '$s/$/ logo.nologo/' /boot/cmdline.txt
+sudo sed -i 's/quiet splash/logo.nologo/' /boot/cmdline.txt
 
 #Install Python Modules
 sudo pip install pyalsaaudio==0.8.4
@@ -52,17 +66,6 @@ sudo cp configuration/keys.conf /etc/triggerhappy/triggers.d
 echo configuring TriggerHappy service...
 sudo sed -i 's/nobody/pi/' /etc/systemd/system/multi-user.target.wants/triggerhappy.service
 
-#Configure RTC
-echo configuring RTC...
-sudo apt-get -y remove fake-hwclock
-
-
-sudo update-rc.d -f fake-hwclock remove
-sudo systemctl disable fake-hwclock
-sudo sed -i -e '7,9s/^/#/' -e '29s/^/#/' -e '32s/^/#/' /lib/udev/hwclock-set
-sudo hwclock -r
-date
-sudo hwclock -w
 
 #Configure backlight udev rules
 echo "SUBSYSTEM==\"backlight\",RUN+=\"/bin/chmod 666 /sys/class/backlight/%k/brightness /sys/class/backlight/%k/bl_power\"" | sudo tee /etc/udev/rules.d/backlight-permissions.rules
@@ -150,3 +153,6 @@ else
 	#wpa_passphrase=SnakePenis!!
 	sudo sh -c 'echo "#Pi 3 Wifi options\ninterface=wlan0\ndriver=nl80211\n#\nhw_mode=g\nchannel=6\nieee80211n=1\nwmm_enabled=1\nht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]\nmacaddr_acl=0\nignore_broadcast_ssid=0\ncountry_code=US\n#\n#WPA2\nauth_algs=1\nwpa=2\nwpa_key_mgmt=WPA-PSK\n\rsn_pairwise=CCMP\n#\n#SSID\nssid=carputer\nwpa_passphrase=SnakePenis!!" >> /etc/hostapd/hostapd.conf'
 fi
+
+sudo reboot
+

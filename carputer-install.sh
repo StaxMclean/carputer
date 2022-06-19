@@ -5,11 +5,15 @@ echo Running apt update...
 sudo apt update
 
 #Install Dash
+cd
+
 git clone https://github.com/openDsh/dash
 
 cd dash
 
 ./install.sh
+
+cd ~/carputer
 
 
 #Setting config file options
@@ -26,8 +30,6 @@ disable_splash=1\
 dtoverlay=i2c-rtc,pcf8523\
 \n\
 dtoverlay=hifiberry-dacplushd\
-\n\
-gpu_mem=128\
 \n\
 dtoverlay=gpio-poweroff,gpiopin=4,active_low\
 ' >> /boot/config.txt"
@@ -120,4 +122,31 @@ sudo rfkill unblock wlan
 #Configure the AP Software
 #Create the hostapd configuration file, located at /etc/hostapd/hostapd.conf, to add the various parameters for your new wireless network.
 sudo touch /etc/hostapd/hostapd.conf
-sudo sh -c 'echo "\country_code=US\ninterface=wlan0\nssid=carputer\nhw_mode=a\nchannel=36\nieee80211d=1\nmacaddr_acl=0\nauth_algs=1\nmax_num_sta=10\nignore_broadcast_ssid=0\nwmm_enabled=1\nwpa=2\nwpa_passphrase=SnakePenis!!\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP\n\n\n\n# Use iw list to see which capabilities your WiFi card has\n# 80211ac: vht_oper_centr_freq_seg1_idx not working currently, problem using ch 149\nieee80211n=1\nieee80211ac=1\nht_capab=[HT40+][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40][MAX-AMSDU-3839]\nvht_capab=[MAX-MPDU-3895][SHORT-GI-80][SU-BEAMFORMEE]\nvht_oper_chwidth=1\nvht_oper_centr_freq_seg0_idx=42" >> /etc/hostapd/hostapd.conf'
+
+if grep -q "Raspberry Pi 4" /proc/cpuinfo; then
+	sudo sh -c 'echo "country_code=US\ninterface=wlan0\nssid=carputer\nhw_mode=a\nchannel=36\nieee80211d=1\nmacaddr_acl=0\nauth_algs=1\nmax_num_sta=10\nignore_broadcast_ssid=0\nwmm_enabled=1\nwpa=2\nwpa_passphrase=SnakePenis!!\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP\n\n\n\n# Use iw list to see which capabilities your WiFi card has\n# 80211ac: vht_oper_centr_freq_seg1_idx not working currently, problem using ch 149\nieee80211n=1\nieee80211ac=1\nht_capab=[HT40+][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40][MAX-AMSDU-3839]\nvht_capab=[MAX-MPDU-3895][SHORT-GI-80][SU-BEAMFORMEE]\nvht_oper_chwidth=1\nvht_oper_centr_freq_seg0_idx=42" >> /etc/hostapd/hostapd.conf'
+else
+	#Pi 3 Wifi options
+	#interface=wlan0
+	#driver=nl80211
+	#
+	#hw_mode=g
+	#channel=6
+	#ieee80211n=1
+	#wmm_enabled=1
+	#ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
+	#macaddr_acl=0
+	#ignore_broadcast_ssid=0
+	#country_code=US
+	#
+	#WPA2
+	#auth_algs=1
+	#wpa=2
+	#wpa_key_mgmt=WPA-PSK
+	#rsn_pairwise=CCMP
+	#
+	#SSID
+	#ssid=carputer
+	#wpa_passphrase=SnakePenis!!
+	sudo sh -c 'echo "#Pi 3 Wifi options\ninterface=wlan0\ndriver=nl80211\n#\nhw_mode=g\nchannel=6\nieee80211n=1\nwmm_enabled=1\nht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]\nmacaddr_acl=0\nignore_broadcast_ssid=0\ncountry_code=US\n#\n#WPA2\nauth_algs=1\nwpa=2\nwpa_key_mgmt=WPA-PSK\n\rsn_pairwise=CCMP\n#\n#SSID\nssid=carputer\nwpa_passphrase=SnakePenis!!" >> /etc/hostapd/hostapd.conf'
+fi

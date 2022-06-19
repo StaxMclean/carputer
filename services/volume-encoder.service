@@ -5,7 +5,7 @@
 [Service]
  User=root
  Group=root
- ExecStart=/home/pi/scripts/rotary_encoder_volume.py
+ ExecStart=/home/pi/carputer/scripts/rotary_encoder_volume.py
 
 [Install]
  WantedBy=multi-user.target

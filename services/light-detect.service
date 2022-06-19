@@ -5,7 +5,7 @@
 [Service]
  User=pi
  Group=pi
- ExecStart=/home/pi/scripts/lightdetect.py
+ ExecStart=/home/pi/carputer/scripts/lightdetect.py
 
 [Install]
  WantedBy=multi-user.target

@@ -5,7 +5,7 @@
 [Service]
  User=pi
  Group=pi
- ExecStart=/home/pi/scripts/fan.py
+ ExecStart=/home/pi/caputer/scripts/fan.py
 
 [Install]
  WantedBy=multi-user.target

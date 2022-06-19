@@ -24,7 +24,7 @@ if [[ ! -f "$flag" ]] ; then
 	#write out current crontab
 	crontab -l > mycron
 	#echo new cron into cron file
-	echo "@reboot ./home/pi/carputer/scripts/rtc_config.sh" >> mycron
+	echo "@reboot ./home/pi/carputer/configuration/rtc_config.sh" >> mycron
 	#install new cron file
 	crontab mycron
 	rm mycron

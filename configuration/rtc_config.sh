@@ -17,10 +17,8 @@ else
 	date
 	sudo hwclock -w
 	#
-	# if there is $flag, remove
-	if [[ -f "$flag" ]] ; then
-  		rm -f "$flag"
-  		#remove cronjob
-  		crontab -r
-	fi
+	#remove flag
+	rm -f "$flag"
+  	#remove cronjob
+  	crontab -r pi
 fi

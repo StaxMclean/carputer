@@ -13,7 +13,12 @@ cd dash
 
 ./install.sh
 
+./rpi.sh -adi
+./rpi.sh -asd
+
 cd ~/carputer
+
+sudo chmod +x configuration/rtc_config.sh
 
 #Setting install run once flag
 flag="install_flag"

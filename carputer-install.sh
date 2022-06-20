@@ -151,7 +151,7 @@ else
 	#SSID
 	#ssid=carputer
 	#wpa_passphrase=SnakePenis!!
-	sudo sh -c 'echo "#Pi 3 Wifi options\ninterface=wlan0\ndriver=nl80211\n#\nhw_mode=g\nchannel=6\nieee80211n=1\nwmm_enabled=1\nht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]\nmacaddr_acl=0\nignore_broadcast_ssid=0\ncountry_code=US\n#\n#WPA2\nauth_algs=1\nwpa=2\nwpa_key_mgmt=WPA-PSK\n\rsn_pairwise=CCMP\n#\n#SSID\nssid=carputer\nwpa_passphrase=SnakePenis!!" >> /etc/hostapd/hostapd.conf'
+	sudo sh -c 'echo "#Pi 3 Wifi options\ninterface=wlan0\ndriver=nl80211\n#\nhw_mode=g\nchannel=6\nieee80211n=1\nwmm_enabled=1\nht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]\nmacaddr_acl=0\nignore_broadcast_ssid=0\ncountry_code=US\n#\n#WPA2\nauth_algs=1\nwpa=2\nwpa_key_mgmt=WPA-PSK\nrsn_pairwise=CCMP\n#\n#SSID\nssid=carputer\nwpa_passphrase=SnakePenis!!" >> /etc/hostapd/hostapd.conf'
 fi
 
 sudo reboot

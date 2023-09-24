@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd ~/carputer
 
 #Setting install run once flag
@@ -20,5 +22,5 @@ else
 	#remove flag
 	rm -f "$flag"
   	#remove cronjob
-  	crontab -r pi
+  	crontab -u pi -r
 fi

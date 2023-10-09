@@ -162,5 +162,11 @@ fi
 #pulseaudio package seems to be corrupted - reinstall
 sudo apt-get remove pulseaudio -y
 sudo apt-get install pulseaudio
+
+#bluetooth package seems to be corrupted - reinstall
+sudo apt remove bluez
+sudo apt install bluez
+sudo apt-get install pi-bluetooth
+
 sudo reboot
 

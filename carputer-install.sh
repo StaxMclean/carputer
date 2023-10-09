@@ -48,9 +48,9 @@ disable_splash=1\
 \n\
 dtoverlay=i2c-rtc,pcf8523\
 \n\
-dtoverlay=hifiberry-dacplushd\
+dtoverlay=iqaudio-dacplus\
 \n\
-dtoverlay=gpio-poweroff,gpiopin=4,active_low\
+POWER_OFF_ON_HALT=1\
 ' >> /boot/config.txt"
 sudo sed -i '/^dtparam=audio=on$/s/^/#/' /boot/config.txt
 
@@ -159,5 +159,8 @@ else
 	sudo sh -c 'echo "#Pi 3 Wifi options\ninterface=wlan0\ndriver=nl80211\n#\nhw_mode=g\nchannel=6\nieee80211n=1\nwmm_enabled=1\nht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]\nmacaddr_acl=0\nignore_broadcast_ssid=0\ncountry_code=US\n#\n#WPA2\nauth_algs=1\nwpa=2\nwpa_key_mgmt=WPA-PSK\nrsn_pairwise=CCMP\n#\n#SSID\nssid=carputer\nwpa_passphrase=SnakePenis!!" >> /etc/hostapd/hostapd.conf'
 fi
 
+#pulseaudio package seems to be corrupted - reinstall
+sudo apt-get remove pulseaudio
+sudo apt-get install pulseaudio
 sudo reboot
 

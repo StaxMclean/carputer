@@ -160,7 +160,7 @@ else
 fi
 
 #pulseaudio package seems to be corrupted - reinstall
-sudo apt-get remove pulseaudio
+sudo apt-get remove pulseaudio -y
 sudo apt-get install pulseaudio
 sudo reboot
 
